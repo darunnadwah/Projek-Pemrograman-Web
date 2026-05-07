@@ -13,8 +13,13 @@ Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::redirect('/dashboard', '/');
+
+
+// Route untuk halaman katalog buku    
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/katalog', [BookController::class, 'index'])->name('books.index');
+Route::get('/', [BookController::class, 'welcome'])->name('welcome');
 // Route sementara untuk tambah stok buku
 Route::post('/books/{id}/add-stock', function ($id) {
         $book = \App\Models\Book::findOrFail($id);
@@ -39,6 +44,10 @@ Route::post('/books/{id}/add-stock', function ($id) {
         $book->save();
         return back();
     })->name('books.add-stock');
+    // Ubah dari Route::view... menjadi:
+Route::get('/', [BookController::class, 'welcome'])->name('welcome');
+
+
 // Route untuk kurangi stok fisik
 Route::post('/books/{id}/reduce-stock', function ($id) {
     $book = \App\Models\Book::findOrFail($id);

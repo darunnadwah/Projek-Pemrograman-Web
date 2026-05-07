@@ -2,21 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book; // Memanggil model Book agar bisa mengambil data
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BookController extends Controller
 {
-    public function index()
+    // Fungsi untuk Halaman Utama (Welcome Page)
+    public function welcome()
     {
-        // Mengambil semua data buku beserta relasinya (category, author, dsb)
-        $books = Book::with(['category', 'author', 'publisher'])->get();
+        $categories = Category::all();
+        // Kita ambil beberapa buku untuk dipajang di rak
+        $featuredBooks = Book::take(10)->get(); 
+
+        return view('welcome', compact('categories', 'featuredBooks'));
+    }
+
+    // Fungsi untuk Halaman Katalog (Katalog Buku)
+    public function index(Request $request)
+    {
+        $keyword = $request->input('search');
+        $categoryId = $request->input('category');
+
+        $books = Book::with(['category', 'author', 'publisher'])
+            // Filter Search (Judul atau Nama Author)
+            ->when($keyword, function ($query, $keyword) {
+                return $query->where('title', 'like', '%' . $keyword . '%')
+                             ->orWhereHas('author', function($q) use ($keyword) {
+                                 $q->where('name', 'like', '%' . $keyword . '%');
+                             });
+            })
+            // Filter Tombol Kategori
+            ->when($categoryId, function ($query, $categoryId) {
+                return $query->where('category_id', $categoryId);
+            })
+            ->get();
 
         $categories = Category::all();
 
-        // Mengarahkan ke file resources/views/books/index.blade.php
         return view('books.index', compact('books', 'categories'));
     }
 }

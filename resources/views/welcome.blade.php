@@ -542,7 +542,7 @@
     </a>
 
     <ul class="nav-links" id="navLinks">
-        <li><a href="{{ route('books.index')) }}">Katalog</a></li>
+        <li><a href="{{ route('books.index') }}">Katalog</a></li>
         <li><a href="{{ url('/tentang') }}">Tentang</a></li>
 
         @auth
@@ -598,15 +598,17 @@
 
 <!-- ═══════════════════════════════ SEARCH ═══════════════════════════════ -->
 <div class="search-wrap">
-    <form method="GET" action="{{ url('/katalog') }}">
+    <form method="GET" action="{{ route('books.index') }}">
         <div class="search-box">
             <span style="font-size:18px; color:rgba(139,92,246,0.6);">🔍</span>
-            <input
-                type="text"
-                name="q"
-                placeholder="Cari judul, penulis, atau kategori..."
-                value="{{ request('q') }}"
+            
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Cari judul, penulis, atau kategori..." 
+                value="{{ request('search') }}"
             />
+            
             <button type="submit" class="search-submit">Cari Buku</button>
         </div>
     </form>
@@ -739,22 +741,25 @@
 /* ── Build book shelf ── */
 (function() {
     const booksData = [
-        { title: 'Sejarah Nusantara',   color: '#5b21b6', top: '#4c1d95', h: 135, w: 26 },
-        { title: 'Fiksi Sains',          color: '#1d4ed8', top: '#1e3a8a', h: 112, w: 22 },
-        { title: 'Puisi Indonesia',      color: '#065f46', top: '#064e3b', h: 122, w: 20 },
-        { title: 'Filsafat Timur',       color: '#78350f', top: '#451a03', h: 148, w: 28 },
-        { title: 'Teknologi 2024',       color: '#831843', top: '#500724', h: 119, w: 24 },
-        { title: 'Ekonomi Global',       color: '#134e4a', top: '#042f2e', h: 133, w: 26 },
-        { title: 'Novel Klasik',         color: '#3b0764', top: '#2e1065', h: 126, w: 22 },
-        { title: 'Sains & Alam',         color: '#14532d', top: '#052e16', h: 142, w: 30 },
-        { title: 'Hukum & HAM',          color: '#7f1d1d', top: '#450a0a', h: 116, w: 20 },
-        { title: 'Psikologi',            color: '#1e3a5f', top: '#0c1a2e', h: 130, w: 24 },
-        { title: 'Biografi Tokoh',       color: '#312e81', top: '#1e1b4b', h: 140, w: 26 },
-        { title: 'Kuliner Nusantara',    color: '#431407', top: '#7c2d12', h: 114, w: 22 },
+        { id: 1, title: 'Sejarah Nusantara',   color: '#5b21b6', top: '#4c1d95', h: 135, w: 26 },
+        { id: 2, title: 'Fiksi Sains',          color: '#1d4ed8', top: '#1e3a8a', h: 112, w: 22 },
+        { id: 3, title: 'Puisi Indonesia',      color: '#065f46', top: '#064e3b', h: 122, w: 20 },
+        { id: 4, title: 'Filsafat Timur',       color: '#78350f', top: '#451a03', h: 148, w: 28 },
+        { id: 5, title: 'Teknologi 2024',       color: '#831843', top: '#500724', h: 119, w: 24 },
+        { id: 6, title: 'Ekonomi Global',       color: '#134e4a', top: '#042f2e', h: 133, w: 26 },
+        { id: 7, title: 'Novel Klasik',         color: '#3b0764', top: '#2e1065', h: 126, w: 22 },
+        { id: 8, title: 'Sains & Alam',         color: '#14532d', top: '#052e16', h: 142, w: 30 },
+        { id: 9, title: 'Hukum & HAM',          color: '#7f1d1d', top: '#450a0a', h: 116, w: 20 },
+        { id: 10, title: 'Psikologi',            color: '#1e3a5f', top: '#0c1a2e', h: 130, w: 24 },
+        { id: 11, title: 'Biografi Tokoh',       color: '#312e81', top: '#1e1b4b', h: 140, w: 26 },
+        { id: 12, title: 'Kuliner Nusantara',    color: '#431407', top: '#7c2d12', h: 114, w: 22 },
     ];
 
     const shelf = document.getElementById('shelfRow');
     booksData.forEach(b => {
+        const link = document.createElement('a');
+        link.href = `/books?category=${b.id}`; 
+        link.style.textDecoration = 'none';
         const el = document.createElement('div');
         el.className = 'book';
         el.style.cssText = `width:${b.w}px; height:${b.h}px;`;
@@ -765,7 +770,9 @@
             <div class="book-pages"></div>
             <div class="book-top" style="background:linear-gradient(90deg,${b.color},${b.top});"></div>
         `;
-        shelf.appendChild(el);
+
+    link.appendChild(el);
+    shelf.appendChild(link);
     });
 })();
 

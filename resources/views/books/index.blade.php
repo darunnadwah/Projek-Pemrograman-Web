@@ -38,17 +38,19 @@
     <h1>📚 Katalog Buku Kami</h1>
     <div style="margin-bottom: 20px;">
             <h3 style="margin-bottom: 10px;">Filter Kategori:</h3>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <!-- Tombol "Semua" -->
-                <a href="#" style="text-decoration: none; padding: 8px 15px; background: #333; color: white; border-radius: 5px; font-size: 14px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="{{ route('books.index') }}" 
+                    style="text-decoration: none; padding: 8px 15px; background: {{ !request('category') ? '#333' : '#e0e0e0' }}; color: {{ !request('category') ? 'white' : '#333' }}; border-radius: 5px; font-size: 14px;">
                     Semua
-                </a>
-
-                @foreach($categories as $category)
-                    <a href="#" style="text-decoration: none; padding: 8px 15px; background: #e0e0e0; color: #333; border-radius: 5px; font-size: 14px;">
-                        {{ $category->name }}
                     </a>
-                @endforeach
+
+                    @foreach($categories as $category)
+                        <a href="{{ route('books.index', ['category' => $category->id]) }}" 
+                        style="text-decoration: none; padding: 8px 15px; background: {{ request('category') == $category->id ? '#333' : '#e0e0e0' }}; color: {{ request('category') == $category->id ? 'white' : '#333' }}; border-radius: 5px; font-size: 14px;">
+                        {{ $category->name }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
 
