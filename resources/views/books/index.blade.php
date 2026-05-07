@@ -38,18 +38,72 @@
     <h1>📚 Katalog Buku Kami</h1>
     <div style="margin-bottom: 20px;">
             <h3 style="margin-bottom: 10px;">Filter Kategori:</h3>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="{{ route('books.index') }}" 
-                    style="text-decoration: none; padding: 8px 15px; background: {{ !request('category') ? '#333' : '#e0e0e0' }}; color: {{ !request('category') ? 'white' : '#333' }}; border-radius: 5px; font-size: 14px;">
-                    Semua
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px;">
+                    @php
+                        // Sinkronisasi data ID
+                        $selectedIds = collect((array)$categoryIds)->map(fn($id) => (int)$id)->filter()->toArray();
+                        // Cek apakah sedang dalam mode "Semua Kategori" (tidak ada filter yang dipilih)
+                        $isAllActive = empty($selectedIds);
+                    @endphp
+
+                    <a href="{{ route('books.index', ['search' => request('search')]) }}" 
+                    style="padding: 10px 22px; 
+                            border-radius: 25px; 
+                            text-decoration: none;
+                            font-weight: 600;
+                            font-size: 0.85rem;
+                            transition: all 0.3s ease;
+                            /* Jika Aktif (Tidak ada filter lain), warnanya Ungu Tua */
+                            background-color: {{ $isAllActive ? '#5b21b6' : '#7c3aed' }}; 
+                            color: #ffffff;
+                            border: 1px solid {{ $isAllActive ? '#4c1d95' : '#a78bfa' }};
+                            box-shadow: {{ $isAllActive ? 'inset 0 2px 4px rgba(0,0,0,0.3)' : '0 4px 12px rgba(124, 58, 237, 0.3)' }};">
+                        Semua Kategori
                     </a>
 
                     @foreach($categories as $category)
-                        <a href="{{ route('books.index', ['category' => $category->id]) }}" 
-                        style="text-decoration: none; padding: 8px 15px; background: {{ request('category') == $category->id ? '#333' : '#e0e0e0' }}; color: {{ request('category') == $category->id ? 'white' : '#333' }}; border-radius: 5px; font-size: 14px;">
-                        {{ $category->name }}
+                        @php
+                            $isSelected = in_array((int)$category->id, $selectedIds);
+                            
+                            // Logika Toggle: Jika diklik, otomatis membuang status "Semua" karena ia mengirim ID spesifik
+                            if ($isSelected) {
+                                $newSelection = array_diff($selectedIds, [(int)$category->id]);
+                            } else {
+                                $newSelection = array_merge($selectedIds, [(int)$category->id]);
+                            }
+                        @endphp
+
+                        <a href="{{ route('books.index', ['category' => $newSelection, 'search' => request('search')]) }}" 
+                        style="padding: 10px 22px; 
+                                border-radius: 25px; 
+                                text-decoration: none;
+                                font-weight: 600;
+                                font-size: 0.85rem;
+                                transition: all 0.3s ease;
+                                /* Saat DIPILIH: Ungu Tua, Saat TIDAK DIPILIH: Ungu Cerah */
+                                background-color: {{ $isSelected ? '#5b21b6' : '#7c3aed' }}; 
+                                color: #ffffff;
+                                border: 1px solid {{ $isSelected ? '#4c1d95' : '#a78bfa' }};
+                                box-shadow: {{ $isSelected ? 'inset 0 2px 4px rgba(0,0,0,0.3)' : '0 4px 12px rgba(124, 58, 237, 0.3)' }};">
+                            {{ $category->name }}
                         </a>
                     @endforeach
+
+                    @if(!$isAllActive)
+                        <a href="{{ route('books.index', ['search' => request('search')]) }}" 
+                        style="padding: 10px 22px; 
+                                border-radius: 25px; 
+                                text-decoration: none;
+                                font-weight: 600;
+                                font-size: 0.85rem;
+                                transition: all 0.3s ease;
+                                background-color: #7c3aed; 
+                                color: #ffffff;
+                                border: 1px solid #a78bfa;
+                                margin-left: 10px;">
+                        ✕ Reset
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

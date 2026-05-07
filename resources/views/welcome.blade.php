@@ -758,7 +758,7 @@
     const shelf = document.getElementById('shelfRow');
     booksData.forEach(b => {
         const link = document.createElement('a');
-        link.href = `/books?category=${b.id}`; 
+        link.href = `/books?category[]=${b.id}`; 
         link.style.textDecoration = 'none';
         const el = document.createElement('div');
         el.className = 'book';

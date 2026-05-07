@@ -22,7 +22,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->input('search');
-        $categoryId = $request->input('category');
+        $categoryIds = $request->input('category', []);
 
         $books = Book::with(['category', 'author', 'publisher'])
             // Filter Search (Judul atau Nama Author)
@@ -33,13 +33,13 @@ class BookController extends Controller
                              });
             })
             // Filter Tombol Kategori
-            ->when($categoryId, function ($query, $categoryId) {
-                return $query->where('category_id', $categoryId);
-            })
+            ->when(!empty($categoryIds), function ($query) use ($categoryIds) {
+                        return $query->whereIn('category_id', $categoryIds);
+                    })
             ->get();
 
         $categories = Category::all();
 
-        return view('books.index', compact('books', 'categories'));
+        return view('books.index', compact('books', 'categories', 'categoryIds'));
     }
 }
