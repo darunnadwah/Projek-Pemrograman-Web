@@ -324,7 +324,7 @@
             </div>
         </a>
         <div class="nav-links">
-            <a href="/katalog">Katalog</a>
+            <a href="{{ route('books.index') }}">Katalog</a>
             <a href="/tentang">Tentang</a>
             <a href="/login" class="active">Masuk</a>
             <a href="{{ route('register') }}" class="btn-daftar">Daftar</a>

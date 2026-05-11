@@ -769,7 +769,7 @@
 
     <div class="nav-links">
         <a href="#" class="active">Dashboard</a>
-        <a href="#">Katalog</a>
+        <a href="{{ route('books.index') }}">Katalog</a>
         <a href="#">Pesanan</a>
         <a href="#">Wishlist</a>
     </div>
@@ -830,9 +830,15 @@
         <a href="#" class="sidebar-item">
             <span class="icon">⚙️</span> Pengaturan
         </a>
-        <a href="#" class="sidebar-item">
+
+        <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+            @csrf
+        </form>
+        <a href="{{ route('logout') }}" 
+        class="sidebar-item logout-item" 
+        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <span class="icon">🚪</span> Keluar
-        </a>
+        </a>       
     </aside>
 
     <!-- MAIN -->
@@ -1143,6 +1149,18 @@
 
     </main>
 </div>
+
+    <script>
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Jangan hapus active jika itu tombol logout
+                if(!this.classList.contains('logout-item')) {
+                    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

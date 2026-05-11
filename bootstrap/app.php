@@ -21,6 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        $middleware->redirectTo(
+            guests: '/login', // Jika belum login dilempar ke sini
+            users: '/dashboard', // Setelah login dilempar ke sini
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

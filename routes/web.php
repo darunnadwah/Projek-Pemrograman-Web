@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasswordResetController;
 
 Route::get('/', function () {
         return view('welcome');
@@ -77,8 +79,16 @@ Route::middleware('auth')->group(function () {
 //Keranjang
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/forgot-password-code', [PasswordResetController::class, 'showRequestForm'])->name('password.request-code');
+Route::post('/forgot-password-code', [PasswordResetController::class, 'sendResetCode'])->name('password.send-code');
+Route::get('/reset-password-code', [PasswordResetController::class, 'showResetForm'])->name('password.show-reset-form');
+Route::post('/reset-password-code', [PasswordResetController::class, 'resetPassword'])->name('password.reset-with-code');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::get('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
+//Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 require __DIR__.'/auth.php';

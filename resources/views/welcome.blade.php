@@ -624,7 +624,7 @@
 
 <!-- ═══════════════════════════════ CTA BUTTONS ══════════════════════════ -->
 <div class="cta-row">
-    <a href="{{ url('/katalog') }}" class="cta-btn cta-primary">📖 Jelajahi Koleksi</a>
+    <a href="{{ route('books.index') }}" class="cta-btn cta-primary">📖 Jelajahi Koleksi</a>
     <a href="{{ url('/pinjam') }}"  class="cta-btn cta-ghost">🔖 Beli Buku</a>
     @guest
     @endguest
@@ -655,42 +655,42 @@
     <h2 class="section-title">Jelajahi Kategori</h2>
     <p class="section-sub">Pilih kategori favorit Anda</p>
     <div class="cards-grid">
-        <a href="{{ url('/katalog?kategori=fiksi') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">📖</span>
             <div class="cat-name">Fiksi &amp; Novel</div>
             <div class="cat-count">1.240 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=sains') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">🔬</span>
             <div class="cat-name">Sains &amp; Teknologi</div>
             <div class="cat-count">980 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=sejarah') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">🏛️</span>
             <div class="cat-name">Sejarah</div>
             <div class="cat-count">720 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=bisnis') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">💼</span>
             <div class="cat-name">Bisnis &amp; Ekonomi</div>
             <div class="cat-count">654 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=agama') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">🕌</span>
             <div class="cat-name">Agama &amp; Spiritual</div>
             <div class="cat-count">530 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=anak') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">🧒</span>
             <div class="cat-name">Buku Anak</div>
             <div class="cat-count">460 buku</div>
         </a>
-        <a href="{{ url('/katalog?kategori=jurnal') }}" class="cat-card">
+        <a href="{{ route('books.index') }}" class="cat-card">
             <span class="cat-icon">📝</span>
             <div class="cat-name">Jurnal &amp; Riset</div>
             <div class="cat-count">310 buku</div>
         </a>
-        <a href="{{ url('/katalog') }}" class="cat-card" style="border-style:dashed;">
+        <a href="{{ route('books.index') }}" class="cat-card" style="border-style:dashed;">
             <span class="cat-icon">🗂️</span>
             <div class="cat-name">Semua Kategori</div>
             <div class="cat-count">Lihat selengkapnya →</div>

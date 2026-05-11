@@ -305,7 +305,7 @@
             </div>
         </a>
         <div class="nav-links">
-            <a href="/katalog">Katalog</a>
+            <a href="{{ route('books.index') }}">Katalog</a>
             <a href="/tentang">Tentang</a>
             <a href="{{ route('login') }}">Masuk</a>
             <a href="{{ route('register') }}" class="active btn-masuk">Daftar</a>

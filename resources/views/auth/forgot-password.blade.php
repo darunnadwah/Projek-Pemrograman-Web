@@ -245,9 +245,78 @@
             box-shadow:0 6px 30px rgba(124,106,247,0.35);
         }
 
-        .btn:hover{
-            transform:translateY(-2px);
-            box-shadow:0 8px 35px rgba(124,106,247,0.5);
+        .method-selection{
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+            margin-bottom:30px;
+        }
+
+        .method-option{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:16px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:12px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .method-option:hover{
+            background:rgba(255,255,255,0.08);
+            border-color:rgba(124,106,247,0.3);
+        }
+
+        .method-option input[type="radio"]{
+            display:none;
+        }
+
+        .method-option input[type="radio"]:checked + label{
+            color:#7c6af7;
+        }
+
+        .method-option input[type="radio"]:checked ~ label .method-icon{
+            background:#7c6af7;
+            color:#fff;
+        }
+
+        .method-option label{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            cursor:pointer;
+            margin:0;
+            width:100%;
+        }
+
+        .method-icon{
+            width:40px;
+            height:40px;
+            background:rgba(255,255,255,0.1);
+            border-radius:8px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#8880c0;
+            transition:0.2s;
+        }
+
+        .method-content{
+            flex:1;
+        }
+
+        .method-title{
+            font-size:14px;
+            font-weight:600;
+            color:#fff;
+            margin-bottom:2px;
+        }
+
+        .method-desc{
+            font-size:12px;
+            color:#8880c0;
         }
 
         .back{
@@ -316,14 +385,42 @@
             </h1>
 
             <p class="subtitle">
-                Masukkan alamat email akun Bookify kamu.
-                Kami akan mengirimkan link untuk mengatur ulang kata sandi.
+                Pilih metode reset password yang kamu inginkan.
             </p>
 
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <form method="POST" action="{{ route('password.email') }}">
+            <!-- Method Selection -->
+            <div class="method-selection">
+                <div class="method-option" onclick="selectMethod('email')">
+                    <input type="radio" id="method_email" name="reset_method" value="email" checked>
+                    <label for="method_email">
+                        <div class="method-icon">
+                            <i class="ti ti-mail"></i>
+                        </div>
+                        <div class="method-content">
+                            <div class="method-title">Reset via Email</div>
+                            <div class="method-desc">Kirim link reset ke email kamu</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="method-option" onclick="selectMethod('code')">
+                    <input type="radio" id="method_code" name="reset_method" value="code">
+                    <label for="method_code">
+                        <div class="method-icon">
+                            <i class="ti ti-device-mobile"></i>
+                        </div>
+                        <div class="method-content">
+                            <div class="method-title">Reset dengan Kode</div>
+                            <div class="method-desc">Dapatkan kode reset langsung</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <form id="resetForm" method="POST" action="{{ route('password.email') }}">
                 @csrf
 
                 <div class="form-group">
@@ -346,7 +443,7 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-400 text-sm" />
                 </div>
 
-                <button type="submit" class="btn">
+                <button type="submit" class="btn" id="submitBtn">
                     Kirim Link Reset →
                 </button>
 
@@ -361,6 +458,26 @@
         </div>
 
     </div>
+
+    <script>
+        function selectMethod(method) {
+            document.getElementById('method_' + method).checked = true;
+            
+            const form = document.getElementById('resetForm');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (method === 'email') {
+                form.action = '{{ route("password.email") }}';
+                submitBtn.textContent = 'Kirim Link Reset →';
+            } else if (method === 'code') {
+                form.action = '{{ route("password.send-code") }}';
+                submitBtn.textContent = 'Dapatkan Kode Reset →';
+            }
+        }
+
+        // Set initial state
+        selectMethod('email');
+    </script>
 
 </body>
 </html>
