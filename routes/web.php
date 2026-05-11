@@ -13,7 +13,9 @@ Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::redirect('/dashboard', '/');
+Route::get('/admin/dashboard', function () {
+        return view('admin-dashboard');
+    })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 
 // Route untuk halaman katalog buku    
