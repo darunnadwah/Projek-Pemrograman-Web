@@ -1,3 +1,19 @@
+@php
+    $referer = request()->headers->get('referer');
+    $currentPath = request()->path();
+    if ($referer && !str_contains($referer, $currentPath)) {
+        session(['back_url_' . $currentPath => $referer]);
+    }
+    $backUrl = session('back_url_' . $currentPath, route('dashboard'));
+    $backLabel = 'Kembali ke Dashboard';
+    if (str_contains($backUrl, '/settings')) {
+        $backLabel = 'Kembali ke Pengaturan';
+    } elseif (str_contains($backUrl, '/dashboard')) {
+        $backLabel = 'Kembali ke Dashboard';
+    } else {
+        $backLabel = 'Kembali';
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -211,9 +227,9 @@
             </div>
             <div class="nav-brand-name">Bookify</div>
         </a>
-        <a href="{{ route('dashboard') }}" class="back-btn" id="back-button">
+        <a href="{{ $backUrl }}" class="back-btn" id="back-button">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span id="back-button-text">Kembali ke Dashboard</span>
+            <span id="back-button-text">{{ $backLabel }}</span>
         </a>
     </nav>
 
@@ -276,22 +292,6 @@
                 <a href="{{ route('books.index') }}" class="btn-shop">Jelajahi Katalog Buku</a>
     </div>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const backBtn = document.getElementById('back-button');
-            const backBtnText = document.getElementById('back-button-text');
-            if (backBtn && backBtnText) {
-                const referrer = document.referrer;
-                const urlParams = new URLSearchParams(window.location.search);
-                if (referrer && referrer.includes('/settings')) {
-                    backBtn.href = '/settings';
-                    backBtnText.textContent = 'Kembali ke Pengaturan';
-                } else if (urlParams.get('back') === 'settings') {
-                    backBtn.href = '/settings';
-                    backBtnText.textContent = 'Kembali ke Pengaturan';
-                }
-            }
-        });
-    </script>
+
 </body>
 </html>
