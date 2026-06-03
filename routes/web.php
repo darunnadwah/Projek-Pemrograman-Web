@@ -6,6 +6,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ReadingController;
 
 Route::get('/', function () {
         return view('welcome');
@@ -24,7 +27,12 @@ Route::get('/admin/dashboard', function () {
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/katalog', [BookController::class, 'index'])->name('books.index');
 Route::get('/', [BookController::class, 'welcome'])->name('welcome');
-// Route sementara untuk tambah stok buku
+
+
+// Route untuk halaman tentang kami
+Route::get('/tentang', function () {
+    return view('about');
+})->name('about');
 Route::post('/books/{id}/add-stock', function ($id) {
         $book = \App\Models\Book::findOrFail($id);
         $book->increment('stock'); // Tambah 1
@@ -74,6 +82,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Order routes
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    // Wishlist routes
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+    Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
+    // Reading routes
+    Route::get('/reading', [ReadingController::class, 'index'])->name('reading.index');
+    Route::post('/reading/start/{id}', [ReadingController::class, 'start'])->name('reading.start');
+    Route::post('/reading/update/{id}', [ReadingController::class, 'updateProgress'])->name('reading.update');
+
+    // Settings route
+    Route::get('/settings', function () {
+        return view('settings.index');
+    })->name('settings.index');
 });
 
 //Keranjang

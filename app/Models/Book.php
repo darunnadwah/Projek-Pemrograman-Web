@@ -9,7 +9,7 @@ class Book extends Model
     // Agar kolom ini bisa diisi secara massal (mass assignment)
     protected $fillable = [
         'title', 'year', 'category_id', 'publisher_id', 
-        'author_id', 'price', 'stock', 'type', 'file_path'
+        'author_id', 'price', 'stock', 'type', 'file_path', 'image'
     ];
 
     // Relasi ke tabel Category

@@ -317,7 +317,9 @@
     <!-- Navbar -->
     <nav>
         <a href="/" class="nav-brand">
-            <div class="nav-logo">📚</div>
+            <div class="nav-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+            </div>
             <div>
                 <div class="nav-brand-name">Bookify</div>
                 <div class="nav-brand-sub">Beli Buku Online</div>
@@ -355,9 +357,9 @@
 
             <!-- Pills -->
             <div class="card-pills">
-                <span class="card-pill">📚 12.450 Buku</span>
-                <span class="card-pill">⚡ Akses 24/7</span>
-                <span class="card-pill">🔒 Aman & Terpercaya</span>
+                <span class="card-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;margin-right:6px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg> 12.450 Buku</span>
+                <span class="card-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:6px;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 17"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> Akses 24/7</span>
+                <span class="card-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Aman & Terpercaya</span>
             </div>
 
             <!-- Session Status -->

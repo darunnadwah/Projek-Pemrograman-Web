@@ -438,7 +438,9 @@
     <!-- Navbar -->
     <nav>
         <a href="{{ route('welcome') }}" class="nav-brand">
-            <div class="nav-logo">📚</div>
+            <div class="nav-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: white;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+            </div>
             <div>
                 <div class="nav-brand-name">Bookify</div>
                 <div class="nav-brand-sub">DIGITAL LIBRARY</div>
@@ -454,7 +456,10 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1 class="header-title">🛒 Keranjang Belanja</h1>
+            <h1 class="header-title" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #a99ef5;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Keranjang Belanja
+            </h1>
             <p class="header-sub">Periksa pesanan Anda sebelum checkout</p>
         </div>
 
@@ -467,7 +472,13 @@
                     @foreach(session('cart') as $id => $details)
                         @php $subtotal = $details['price'] * $details['quantity']; $total += $subtotal; @endphp
                         <div class="cart-item">
-                            <div class="cart-item-cover">📖</div>
+                            <div class="cart-item-cover">
+                                @if(isset($details['image']) && $details['image'])
+                                    <img src="{{ $details['image'] }}" alt="{{ $details['title'] }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                @else
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: rgba(124,106,247,0.5);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+                                @endif
+                            </div>
                             <div class="cart-item-content">
                                 <div class="cart-item-title">{{ $details['title'] }}</div>
                                 <div class="cart-item-author">Penulis: {{ $details['author'] ?? 'Tidak Diketahui' }}</div>
@@ -539,7 +550,9 @@
             <!-- Empty State -->
             <div class="cart-wrapper">
                 <div class="empty-state">
-                    <div class="empty-icon">📚</div>
+                    <div class="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; color: #5a5680;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+                    </div>
                     <h2 class="empty-title">Keranjang Anda Kosong</h2>
                     <p class="empty-desc">Mulai belanja buku favorit Anda sekarang</p>
                     <a href="{{ route('books.index') }}" class="btn-continue-shopping">

@@ -33,8 +33,9 @@
             background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
             border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 17px;
+            color: white;
         }
+        .nav-logo svg { width: 18px; height: 18px; }
 
         .nav-brand-name {
             font-family: 'Playfair Display', serif;
@@ -93,6 +94,9 @@
             font-family: 'Playfair Display', serif;
             font-size: 32px; font-weight: 700; color: #f0f0ff;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .greeting em { font-style: italic; color: #ff6b6b; }
@@ -109,7 +113,11 @@
             font-size: 12px;
             font-weight: 600;
             border: 1px solid rgba(255, 107, 107, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
+        .admin-badge svg { width: 14px; height: 14px; }
 
         /* ── Stats Grid ── */
         .stats-grid {
@@ -145,9 +153,10 @@
             background: rgba(255, 107, 107, 0.15);
             border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
             margin-bottom: 12px;
+            color: #ff6b6b;
         }
+        .stat-icon svg { width: 22px; height: 22px; }
 
         .stat-label {
             font-size: 12px; color: #8880c0;
@@ -193,8 +202,8 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        .card-title-icon {
-            font-size: 20px;
+        .card-title svg {
+            width: 20px; height: 20px; color: #ff6b6b;
         }
 
         /* ── Quick Actions ── */
@@ -215,7 +224,10 @@
             font-size: 13px; font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .action-btn:hover {
@@ -223,6 +235,7 @@
             border-color: rgba(255, 107, 107, 0.6);
             color: #ffb3b3;
         }
+        .action-btn svg { width: 14px; height: 14px; }
 
         /* ── Activity list ── */
         .activity-list {
@@ -237,10 +250,13 @@
             padding: 12px 16px;
             border-radius: 6px;
             font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .activity-icon {
-            margin-right: 8px;
+        .activity-item svg {
+            width: 16px; height: 16px; color: #ff6b6b; flex-shrink: 0;
         }
 
         .activity-empty {
@@ -268,7 +284,9 @@
     <!-- Navbar -->
     <nav>
         <a href="/" class="nav-brand">
-            <div class="nav-logo">⚙️</div>
+            <div class="nav-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
             <div>
                 <div class="nav-brand-name">Bookify<span class="nav-badge">ADMIN</span></div>
             </div>
@@ -292,37 +310,50 @@
         <!-- Header -->
         <div class="admin-header">
             <div>
-                <h1 class="greeting">Halo, <em>{{ Auth::user()->name }}</em> 👋</h1>
+                <h1 class="greeting">Halo, <em>{{ Auth::user()->name }}</em> 
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; color: #ff6b6b; margin-left: 6px;"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </h1>
                 <p class="subtext">Dashboard admin Bookify</p>
             </div>
-            <div class="admin-badge">⚙️ Administrator</div>
+            <div class="admin-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Administrator
+            </div>
         </div>
 
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon">📚</div>
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>
+                </div>
                 <div class="stat-label">Total Buku</div>
                 <div class="stat-value">850</div>
                 <div class="stat-sub">Dalam perpustakaan</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon">👥</div>
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
                 <div class="stat-label">Total User</div>
                 <div class="stat-value">3,200</div>
                 <div class="stat-sub">User terdaftar</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon">📦</div>
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                </div>
                 <div class="stat-label">Pesanan Aktif</div>
                 <div class="stat-value">124</div>
                 <div class="stat-sub">Perlu diproses</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon">💰</div>
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="12" y1="6" x2="12" y2="14"/></svg>
+                </div>
                 <div class="stat-label">Pendapatan Bulan Ini</div>
                 <div class="stat-value">Rp 45M</div>
                 <div class="stat-sub">Total transaksi</div>
@@ -334,36 +365,54 @@
             <!-- Quick Actions -->
             <div class="content-card">
                 <div class="card-title">
-                    <span class="card-title-icon">⚡</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     Aksi Cepat
                 </div>
                 <div class="quick-actions">
-                    <a href="/admin/books/create" class="action-btn">➕ Tambah Buku</a>
-                    <a href="/admin/books" class="action-btn">📚 Kelola Buku</a>
-                    <a href="/admin/users" class="action-btn">👥 Kelola User</a>
-                    <a href="/admin/orders" class="action-btn">📦 Pesanan</a>
-                    <a href="/admin/reports" class="action-btn">📊 Laporan</a>
-                    <a href="/admin/settings" class="action-btn">⚙️ Pengaturan</a>
+                    <a href="/admin/books/create" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Tambah Buku
+                    </a>
+                    <a href="/admin/books" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>
+                        Kelola Buku
+                    </a>
+                    <a href="/admin/users" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        Kelola User
+                    </a>
+                    <a href="/admin/orders" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        Pesanan
+                    </a>
+                    <a href="/admin/reports" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        Laporan
+                    </a>
+                    <a href="/admin/settings" class="action-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        Pengaturan
+                    </a>
                 </div>
             </div>
 
             <!-- Recent Activities -->
             <div class="content-card">
                 <div class="card-title">
-                    <span class="card-title-icon">🔔</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9m-9.73 13a3 3 0 0 0 5.46 0"/></svg>
                     Aktivitas Terbaru
                 </div>
                 <div class="activity-list">
                     <div class="activity-item">
-                        <span class="activity-icon">👤</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         User baru "Siti Nurhaliza" terdaftar
                     </div>
                     <div class="activity-item">
-                        <span class="activity-icon">📦</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                         Pesanan #1234 dikonfirmasi
                     </div>
                     <div class="activity-item">
-                        <span class="activity-icon">📚</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>
                         Buku "Filosofi Jawa" ditambahkan
                     </div>
                 </div>
@@ -372,20 +421,20 @@
             <!-- System Status -->
             <div class="content-card">
                 <div class="card-title">
-                    <span class="card-title-icon">✅</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     Status Sistem
                 </div>
                 <div class="activity-list">
                     <div class="activity-item">
-                        <span class="activity-icon">⚙️</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                         Server Status: Online
                     </div>
                     <div class="activity-item">
-                        <span class="activity-icon">💾</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                         Database: Connected
                     </div>
                     <div class="activity-item">
-                        <span class="activity-icon">📈</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                         Performance: Excellent
                     </div>
                 </div>

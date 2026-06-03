@@ -124,7 +124,7 @@
             background: linear-gradient(135deg, #7c3aed, #a855f7);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
+            color: white;
         }
         .nav-brand-text { line-height: 1.1; }
         .nav-brand-text strong {
@@ -188,6 +188,10 @@
             display: flex; align-items: center; justify-content: center;
             border: 2px solid var(--bg-deep);
         }
+        .nav-avatar-link {
+            text-decoration: none;
+            color: inherit;
+        }
         .nav-avatar {
             width: 36px; height: 36px;
             border-radius: 50%;
@@ -197,6 +201,7 @@
             font-weight: 600;
             cursor: pointer;
             border: 2px solid rgba(124,58,237,0.4);
+            color: white;
         }
 
         /* ── LAYOUT ── */
@@ -252,7 +257,7 @@
             color: var(--accent);
             border: 1px solid rgba(124,58,237,0.25);
         }
-        .sidebar-item .icon { font-size: 1rem; width: 20px; text-align: center; }
+        .sidebar-item svg { width: 16px; height: 16px; flex-shrink: 0; }
         .sidebar-badge {
             margin-left: auto;
             background: var(--purple);
@@ -298,6 +303,9 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .greeting-text h1 {
             font-family: 'Playfair Display', serif;
@@ -305,6 +313,9 @@
             font-weight: 900;
             color: var(--text-primary);
             line-height: 1.1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .greeting-text h1 span { color: var(--accent); }
         .greeting-text p {
@@ -316,6 +327,10 @@
             display: flex;
             gap: 0.75rem;
             flex-shrink: 0;
+            z-index: 10;
+        }
+        .btn-link-action {
+            text-decoration: none;
         }
         .btn-primary {
             background: var(--purple);
@@ -328,6 +343,9 @@
             cursor: pointer;
             transition: all 0.2s;
             font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .btn-primary:hover {
             background: #6d28d9;
@@ -345,6 +363,9 @@
             cursor: pointer;
             transition: all 0.2s;
             font-family: 'DM Sans', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .btn-outline:hover { border-color: var(--border-hover); color: var(--text-primary); }
 
@@ -355,6 +376,10 @@
             gap: 1rem;
             margin-bottom: 2rem;
         }
+        .stat-card-link {
+            text-decoration: none;
+            color: inherit;
+        }
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -363,6 +388,7 @@
             transition: all 0.25s;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
         .stat-card::after {
             content: '';
@@ -383,9 +409,9 @@
             width: 38px; height: 38px;
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
             margin-bottom: 0.9rem;
         }
+        .stat-icon svg { width: 18px; height: 18px; color: white; }
         .stat-icon.purple { background: rgba(124,58,237,0.2); }
         .stat-icon.blue { background: rgba(59,130,246,0.15); }
         .stat-icon.green { background: rgba(16,185,129,0.15); }
@@ -449,7 +475,8 @@
             align-items: center;
             gap: 1rem;
             transition: all 0.22s;
-            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         .book-row:hover {
             background: var(--bg-card-hover);
@@ -464,7 +491,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            overflow: hidden;
+        }
+        .book-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .book-info { flex: 1; min-width: 0; }
         .book-title {
@@ -566,10 +598,11 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 1rem;
-            cursor: pointer;
             transition: all 0.25s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         .book-card:hover {
             background: var(--bg-card-hover);
@@ -584,10 +617,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
             margin-bottom: 0.9rem;
             position: relative;
             overflow: hidden;
+            background: rgba(255,255,255,0.05);
+        }
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .book-cover-badge {
             position: absolute;
@@ -599,6 +637,7 @@
             padding: 2px 6px;
             border-radius: 5px;
             letter-spacing: 0.04em;
+            z-index: 2;
         }
         .book-card .book-title { font-size: 0.82rem; }
         .book-card .book-author { font-size: 0.72rem; margin-bottom: 0.5rem; }
@@ -610,6 +649,9 @@
         }
         .stars { color: #fbbf24; font-size: 0.7rem; letter-spacing: 1px; }
         .rating-val { font-size: 0.7rem; color: var(--text-muted); }
+        .book-price-row {
+            margin-top: auto;
+        }
         .book-price { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
         .book-price-old { font-size: 0.7rem; color: var(--text-muted); text-decoration: line-through; margin-left: 4px; }
         .book-add-btn {
@@ -625,6 +667,10 @@
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
         .book-add-btn:hover {
             background: var(--purple);
@@ -644,7 +690,8 @@
             display: flex;
             gap: 0.65rem;
             align-items: center;
-            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
             transition: all 0.2s;
         }
         .wishlist-item:hover { background: var(--bg-card-hover); border-color: rgba(124,58,237,0.2); }
@@ -653,9 +700,16 @@
             border-radius: 5px;
             flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
         }
-        .wish-title { font-size: 0.75rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+        .wish-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .wish-info { min-width: 0; flex: 1; }
+        .wish-title { font-size: 0.75rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .wish-price { font-size: 0.7rem; color: var(--accent); font-weight: 600; margin-top: 2px; }
 
         .category-list { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -669,9 +723,12 @@
             gap: 0.75rem;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
         }
         .category-item:hover { background: var(--bg-card-hover); border-color: rgba(124,58,237,0.2); }
-        .cat-icon { font-size: 1.1rem; width: 28px; text-align: center; }
+        .cat-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+        .cat-icon svg { width: 18px; height: 18px; color: var(--purple-light); }
         .cat-name { font-size: 0.83rem; font-weight: 500; color: var(--text-primary); flex: 1; }
         .cat-count { font-size: 0.7rem; color: var(--text-muted); }
         .cat-arrow { color: var(--text-muted); font-size: 0.7rem; }
@@ -721,6 +778,23 @@
         }
         .promo-sub { font-size: 0.82rem; color: var(--text-secondary); }
 
+        /* Empty states */
+        .empty-state-small {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border: 1px dashed rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        .empty-state-small svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 1200px) {
             .books-grid { grid-template-columns: repeat(4, 1fr); }
@@ -759,8 +833,10 @@
 
 <!-- NAVBAR -->
 <nav>
-    <a href="/" class="nav-brand">
-        <div class="nav-logo">📚</div>
+    <a href="{{ url('/') }}" class="nav-brand">
+        <div class="nav-logo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+        </div>
         <div class="nav-brand-text">
             <strong>Bookify</strong>
             <span>BELI BUKU ONLINE</span>
@@ -768,18 +844,22 @@
     </a>
 
     <div class="nav-links">
-        <a href="#" class="active">Dashboard</a>
+        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
         <a href="{{ route('books.index') }}">Katalog</a>
-        <a href="#">Pesanan</a>
-        <a href="#">Wishlist</a>
+        <a href="{{ route('orders.index') }}">Pesanan</a>
+        <a href="{{ route('wishlist.index') }}">Wishlist</a>
     </div>
 
     <div class="nav-right">
-        <a href="#" class="nav-cart">
-            🛒
-            <span class="cart-badge">3</span>
+        <a href="{{ route('cart.index') }}" class="nav-cart">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span class="cart-badge">{{ count((array) session('cart', [])) }}</span>
         </a>
-        <div class="nav-avatar">RS</div>
+        <a href="{{ route('profile.edit') }}" class="nav-avatar-link">
+            <div class="nav-avatar">
+                {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+            </div>
+        </a>
     </div>
 </nav>
 
@@ -789,55 +869,58 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-section-label">Menu</div>
-        <a href="#" class="sidebar-item active">
-            <span class="icon">🏠</span> Dashboard
+        <a href="{{ route('dashboard') }}" class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">📖</span> Sedang Dibaca
+        <a href="{{ route('reading.index') }}" class="sidebar-item {{ request()->routeIs('reading.index') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            Sedang Dibaca
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">📦</span> Pesanan Saya
-            <span class="sidebar-badge">2</span>
+        <a href="{{ route('orders.index') }}" class="sidebar-item {{ request()->routeIs('orders.index') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            Pesanan Saya
+            @if($stats['purchased_count'] > 0)
+                <span class="sidebar-badge">{{ $stats['purchased_count'] }}</span>
+            @endif
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">❤️</span> Wishlist
-        </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">⭐</span> Ulasan Saya
+        <a href="{{ route('wishlist.index') }}" class="sidebar-item {{ request()->routeIs('wishlist.index') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Wishlist
         </a>
 
         <div class="sidebar-section-label">Jelajahi</div>
-        <a href="#" class="sidebar-item">
-            <span class="icon">🔮</span> Fiksi
+        <a href="{{ route('books.index', ['category' => [1]]) }}" class="sidebar-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.905 0-5.64-.78-8.006-2.147m16.012 0a11.953 11.953 0 0 0-8.006 2.147"/></svg>
+            Fiksi & Novel
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">🧠</span> Non-fiksi
+        <a href="{{ route('books.index', ['category' => [2]]) }}" class="sidebar-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            Sains & Teknologi
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">💼</span> Bisnis
-        </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">🌱</span> Self-help
-        </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">🔬</span> Sains
+        <a href="{{ route('books.index', ['category' => [4]]) }}" class="sidebar-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Bisnis & Ekonomi
         </a>
 
         <div class="sidebar-section-label">Akun</div>
-        <a href="#" class="sidebar-item">
-            <span class="icon">👤</span> Profil
+        <a href="{{ route('profile.edit') }}" class="sidebar-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Profil
         </a>
-        <a href="#" class="sidebar-item">
-            <span class="icon">⚙️</span> Pengaturan
+        <a href="{{ route('settings.index') }}" class="sidebar-item {{ request()->routeIs('settings.index') ? 'active' : '' }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Pengaturan
         </a>
 
         <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
             @csrf
         </form>
         <a href="{{ route('logout') }}" 
-        class="sidebar-item logout-item" 
-        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <span class="icon">🚪</span> Keluar
+           class="sidebar-item logout-item" 
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            Keluar
         </a>       
     </aside>
 
@@ -847,42 +930,73 @@
         <!-- Greeting Banner -->
         <div class="greeting-banner fade-up delay-1">
             <div class="greeting-text">
-                <div class="subtitle">✦ Selamat Datang Kembali</div>
-                <h1>Hai, <span>Nabila Alya Chalisa</span> 👋</h1>
-                <p>Kamu punya 2 pesanan dalam perjalanan & 3 buku belum selesai dibaca.</p>
+                <div class="subtitle">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Selamat Datang Kembali
+                </div>
+                <h1>Hai, <span>{{ Auth::user()->name }}</span> 
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 6px;"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </h1>
+                <p>Kamu memiliki {{ $stats['purchased_count'] }} transaksi di Bookify &amp; {{ $stats['reading_count'] }} buku aktif dalam progres membaca.</p>
             </div>
             <div class="greeting-cta">
-                <button class="btn-outline">Lacak Pesanan</button>
-                <button class="btn-primary">Lanjut Membaca</button>
+                <a href="{{ route('orders.index') }}" class="btn-link-action">
+                    <button class="btn-outline">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                        Lacak Pesanan
+                    </button>
+                </a>
+                <a href="{{ route('reading.index') }}" class="btn-link-action">
+                    <button class="btn-primary">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15z"/></svg>
+                        Lanjut Membaca
+                    </button>
+                </a>
             </div>
         </div>
 
         <!-- Stats -->
         <div class="stats-grid fade-up delay-2">
-            <div class="stat-card">
-                <div class="stat-icon purple">📚</div>
-                <div class="stat-value">24</div>
-                <div class="stat-label">Total Buku Dibeli</div>
-                <div class="stat-change up">↑ +3 bulan ini</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon blue">📖</div>
-                <div class="stat-value">3</div>
-                <div class="stat-label">Sedang Dibaca</div>
-                <div class="stat-change muted">dari 5 buku aktif</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon green">✅</div>
-                <div class="stat-value">18</div>
-                <div class="stat-label">Buku Selesai</div>
-                <div class="stat-change up">↑ 75% selesai rate</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon amber">❤️</div>
-                <div class="stat-value">12</div>
-                <div class="stat-label">Di Wishlist</div>
-                <div class="stat-change muted">Rp 1,2jt est. total</div>
-            </div>
+            <a href="{{ route('orders.index') }}" class="stat-card-link">
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                    </div>
+                    <div class="stat-value">{{ $stats['purchased_count'] }}</div>
+                    <div class="stat-label">Total Buku Dibeli</div>
+                    <div class="stat-change up">Transaksi Sukses</div>
+                </div>
+            </a>
+            <a href="{{ route('reading.index') }}" class="stat-card-link">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <div class="stat-value">{{ $stats['reading_count'] }}</div>
+                    <div class="stat-label">Sedang Dibaca</div>
+                    <div class="stat-change muted">buku aktif saat ini</div>
+                </div>
+            </a>
+            <a href="{{ route('reading.index') }}" class="stat-card-link">
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="stat-value">{{ $stats['finished_count'] }}</div>
+                    <div class="stat-label">Buku Selesai</div>
+                    <div class="stat-change up">Telah selesai dibaca</div>
+                </div>
+            </a>
+            <a href="{{ route('wishlist.index') }}" class="stat-card-link">
+                <div class="stat-card">
+                    <div class="stat-icon amber">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </div>
+                    <div class="stat-value">{{ $stats['wishlist_count'] }}</div>
+                    <div class="stat-label">Di Wishlist</div>
+                    <div class="stat-change muted">Buku diincar</div>
+                </div>
+            </a>
         </div>
 
         <!-- Promo Banner -->
@@ -890,9 +1004,11 @@
             <div>
                 <div class="promo-tag">✦ Penawaran Terbatas</div>
                 <div class="promo-title">Flash Sale Akhir Bulan — Diskon s/d 50%</div>
-                <div class="promo-sub">Ribuan judul pilihan dengan harga terbaik. Berakhir dalam 2 hari 14 jam.</div>
+                <div class="promo-sub">Ribuan judul pilihan dengan harga terbaik. Jelajahi katalog sekarang juga.</div>
             </div>
-            <button class="btn-primary">Lihat Promo →</button>
+            <a href="{{ route('books.index') }}">
+                <button class="btn-primary">Lihat Promo →</button>
+            </a>
         </div>
 
         <!-- Continue Reading + Recent Orders -->
@@ -900,101 +1016,64 @@
             <div>
                 <div class="section-header">
                     <div class="section-title">Lanjutkan Membaca</div>
-                    <a href="#" class="section-link">Lihat semua →</a>
+                    <a href="{{ route('reading.index') }}" class="section-link">Lihat semua →</a>
                 </div>
                 <div class="reading-list">
-                    <div class="book-row">
-                        <div class="book-thumb" style="background:rgba(124,58,237,0.15)">🌌</div>
-                        <div class="book-info">
-                            <div class="book-title">Sapiens: Riwayat Singkat Umat Manusia</div>
-                            <div class="book-author">Yuval Noah Harari</div>
-                            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:68%"></div></div>
+                    @forelse($readingBooks as $book)
+                        <a href="{{ route('reading.index') }}" class="book-row">
+                            <div class="book-thumb">
+                                @if($book->image)
+                                    <img src="{{ $book->image }}" alt="{{ $book->title }}">
+                                @else
+                                    <div style="background:#7c6af7;width:100%;height:100%;"></div>
+                                @endif
+                            </div>
+                            <div class="book-info">
+                                <div class="book-title">{{ $book->title }}</div>
+                                <div class="book-author">{{ $book->author->name ?? 'Penulis' }}</div>
+                                <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:{{ $book->progress }}%"></div></div>
+                            </div>
+                            <div class="book-meta">
+                                <div class="book-pct">{{ $book->progress }}%</div>
+                                <div class="book-pages">hal {{ $book->current_page }}/{{ $book->total_pages }}</div>
+                                <button class="btn-read">Lanjut</button>
+                            </div>
+                        </a>
+                    @empty
+                        <div class="empty-state-small">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            <p>Tidak ada buku yang sedang dibaca.</p>
                         </div>
-                        <div class="book-meta">
-                            <div class="book-pct">68%</div>
-                            <div class="book-pages">hal 272/400</div>
-                            <button class="btn-read">Lanjut</button>
-                        </div>
-                    </div>
-                    <div class="book-row">
-                        <div class="book-thumb" style="background:rgba(16,185,129,0.12)">🌿</div>
-                        <div class="book-info">
-                            <div class="book-title">Atomic Habits</div>
-                            <div class="book-author">James Clear</div>
-                            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:33%"></div></div>
-                        </div>
-                        <div class="book-meta">
-                            <div class="book-pct">33%</div>
-                            <div class="book-pages">hal 88/265</div>
-                            <button class="btn-read">Lanjut</button>
-                        </div>
-                    </div>
-                    <div class="book-row">
-                        <div class="book-thumb" style="background:rgba(245,158,11,0.12)">🏆</div>
-                        <div class="book-info">
-                            <div class="book-title">The Psychology of Money</div>
-                            <div class="book-author">Morgan Housel</div>
-                            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:12%"></div></div>
-                        </div>
-                        <div class="book-meta">
-                            <div class="book-pct">12%</div>
-                            <div class="book-pages">hal 25/209</div>
-                            <button class="btn-read">Lanjut</button>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
             <div>
                 <div class="section-header">
                     <div class="section-title">Pesanan Terbaru</div>
-                    <a href="#" class="section-link">Lihat semua →</a>
+                    <a href="{{ route('orders.index') }}" class="section-link">Lihat semua →</a>
                 </div>
                 <div class="order-list">
-                    <div class="order-item">
-                        <div class="order-top">
-                            <div class="order-id">#BKF-20482</div>
-                            <div class="order-status status-shipping">Dikirim</div>
+                    @forelse($recentOrders as $order)
+                        <div class="order-item">
+                            <div class="order-top">
+                                <div class="order-id">#BKF-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</div>
+                                <div class="order-status {{ $order->status == 'pending' ? 'status-processing' : 'status-delivered' }}">
+                                    {{ ucfirst($order->status) }}
+                                </div>
+                            </div>
+                            <div class="order-title">Pesanan Buku #{{ $order->id }}</div>
+                            <div class="order-bottom">
+                                <div class="order-date">{{ $order->created_at->format('d M Y') }}</div>
+                                <div class="order-price">Rp {{ number_format($order->total_price, 0, ',', '.') }}</div>
+                            </div>
                         </div>
-                        <div class="order-title">Ikigai + The Almanack of Naval</div>
-                        <div class="order-bottom">
-                            <div class="order-date">8 Mei 2026</div>
-                            <div class="order-price">Rp 178.000</div>
+                    @empty
+                        <div class="empty-state-small">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            <p>Belum ada pesanan terbaru.</p>
                         </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="order-top">
-                            <div class="order-id">#BKF-20391</div>
-                            <div class="order-status status-processing">Diproses</div>
-                        </div>
-                        <div class="order-title">Deep Work — Cal Newport</div>
-                        <div class="order-bottom">
-                            <div class="order-date">10 Mei 2026</div>
-                            <div class="order-price">Rp 95.000</div>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="order-top">
-                            <div class="order-id">#BKF-20104</div>
-                            <div class="order-status status-delivered">Diterima</div>
-                        </div>
-                        <div class="order-title">Atomic Habits — James Clear</div>
-                        <div class="order-bottom">
-                            <div class="order-date">28 Apr 2026</div>
-                            <div class="order-price">Rp 89.000</div>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="order-top">
-                            <div class="order-id">#BKF-19875</div>
-                            <div class="order-status status-delivered">Diterima</div>
-                        </div>
-                        <div class="order-title">Sapiens — Yuval Noah Harari</div>
-                        <div class="order-bottom">
-                            <div class="order-date">15 Apr 2026</div>
-                            <div class="order-price">Rp 135.000</div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -1003,74 +1082,39 @@
         <div class="fade-up delay-4">
             <div class="section-header">
                 <div class="section-title">Rekomendasi Untukmu</div>
-                <a href="#" class="section-link">Lihat semua →</a>
+                <a href="{{ route('books.index') }}" class="section-link">Lihat semua →</a>
             </div>
             <div class="books-grid">
-                <div class="book-card">
-                    <div class="book-cover" style="background:rgba(124,58,237,0.15)">
-                        🔮<span class="book-cover-badge">BARU</span>
+                @foreach($recommendations as $book)
+                    <div class="book-card">
+                        <div class="book-cover">
+                            @if($book->image)
+                                <img src="{{ $book->image }}" alt="{{ $book->title }}">
+                            @else
+                                <div style="background:#5b4fe0;width:100%;height:100%;"></div>
+                            @endif
+                            @if($loop->first || $loop->last)
+                                <span class="book-cover-badge">BARU</span>
+                            @endif
+                        </div>
+                        <div class="book-title">{{ $book->title }}</div>
+                        <div class="book-author">{{ $book->author->name ?? 'Penulis' }}</div>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-val">4.8</span>
+                        </div>
+                        <div class="book-price-row">
+                            <span class="book-price">Rp {{ number_format($book->price, 0, ',', '.') }}</span>
+                        </div>
+                        <form action="{{ route('cart.add', $book->id) }}" method="POST" style="margin-top:auto;">
+                            @csrf
+                            <button type="submit" class="book-add-btn">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                + Keranjang
+                            </button>
+                        </form>
                     </div>
-                    <div class="book-title">The Midnight Library</div>
-                    <div class="book-author">Matt Haig</div>
-                    <div class="book-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-val">4.8</span>
-                    </div>
-                    <div><span class="book-price">Rp 115.000</span></div>
-                    <button class="book-add-btn">+ Keranjang</button>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover" style="background:rgba(59,130,246,0.12)">
-                        🌊
-                    </div>
-                    <div class="book-title">Project Hail Mary</div>
-                    <div class="book-author">Andy Weir</div>
-                    <div class="book-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-val">4.9</span>
-                    </div>
-                    <div><span class="book-price">Rp 128.000</span><span class="book-price-old">Rp 160.000</span></div>
-                    <button class="book-add-btn">+ Keranjang</button>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover" style="background:rgba(16,185,129,0.1)">
-                        🌿<span class="book-cover-badge">SALE</span>
-                    </div>
-                    <div class="book-title">The Subtle Art of Not Giving a F*ck</div>
-                    <div class="book-author">Mark Manson</div>
-                    <div class="book-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-val">4.3</span>
-                    </div>
-                    <div><span class="book-price">Rp 79.000</span><span class="book-price-old">Rp 110.000</span></div>
-                    <button class="book-add-btn">+ Keranjang</button>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover" style="background:rgba(245,158,11,0.1)">
-                        💡
-                    </div>
-                    <div class="book-title">Think Again</div>
-                    <div class="book-author">Adam Grant</div>
-                    <div class="book-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-val">4.5</span>
-                    </div>
-                    <div><span class="book-price">Rp 105.000</span></div>
-                    <button class="book-add-btn">+ Keranjang</button>
-                </div>
-                <div class="book-card">
-                    <div class="book-cover" style="background:rgba(236,72,153,0.1)">
-                        🌸<span class="book-cover-badge">BARU</span>
-                    </div>
-                    <div class="book-title">Fourth Wing</div>
-                    <div class="book-author">Rebecca Yarros</div>
-                    <div class="book-rating">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-val">4.7</span>
-                    </div>
-                    <div><span class="book-price">Rp 145.000</span></div>
-                    <button class="book-add-btn">+ Keranjang</button>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -1079,70 +1123,48 @@
             <div>
                 <div class="section-header">
                     <div class="section-title">Wishlist Saya</div>
-                    <a href="#" class="section-link">Kelola →</a>
+                    <a href="{{ route('wishlist.index') }}" class="section-link">Kelola →</a>
                 </div>
                 <div class="wishlist-grid">
-                    <div class="wishlist-item">
-                        <div class="wish-cover" style="background:rgba(124,58,237,0.15)">🏰</div>
-                        <div>
-                            <div class="wish-title">The Name of the Wind</div>
-                            <div class="wish-price">Rp 132.000</div>
+                    @forelse($wishlistBooks as $book)
+                        <a href="{{ route('wishlist.index') }}" class="wishlist-item">
+                            <div class="wish-cover">
+                                @if($book->image)
+                                    <img src="{{ $book->image }}" alt="{{ $book->title }}">
+                                @else
+                                    <div style="background:#7c6af7;width:100%;height:100%;"></div>
+                                @endif
+                            </div>
+                            <div class="wish-info">
+                                <div class="wish-title">{{ $book->title }}</div>
+                                <div class="wish-price">Rp {{ number_format($book->price, 0, ',', '.') }}</div>
+                            </div>
+                        </a>
+                    @empty
+                        <div class="empty-state-small" style="grid-column: span 2;">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                            <p>Wishlist Anda masih kosong.</p>
                         </div>
-                    </div>
-                    <div class="wishlist-item">
-                        <div class="wish-cover" style="background:rgba(16,185,129,0.12)">🧬</div>
-                        <div>
-                            <div class="wish-title">The Gene: An Intimate History</div>
-                            <div class="wish-price">Rp 155.000</div>
-                        </div>
-                    </div>
-                    <div class="wishlist-item">
-                        <div class="wish-cover" style="background:rgba(59,130,246,0.12)">🚀</div>
-                        <div>
-                            <div class="wish-title">Elon Musk — Walter Isaacson</div>
-                            <div class="wish-price">Rp 199.000</div>
-                        </div>
-                    </div>
-                    <div class="wishlist-item">
-                        <div class="wish-cover" style="background:rgba(245,158,11,0.12)">📊</div>
-                        <div>
-                            <div class="wish-title">The Lean Startup</div>
-                            <div class="wish-price">Rp 98.000</div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 
             <div>
                 <div class="section-header">
-                    <div class="section-title">Kategori Favoritmu</div>
-                    <a href="#" class="section-link">Semua kategori →</a>
+                    <div class="section-title">Kategori Buku</div>
+                    <a href="{{ route('books.index') }}" class="section-link">Semua kategori →</a>
                 </div>
                 <div class="category-list">
-                    <div class="category-item">
-                        <div class="cat-icon">🔮</div>
-                        <div class="cat-name">Fiksi & Fantasi</div>
-                        <div class="cat-count">1.240 buku</div>
-                        <div class="cat-arrow">›</div>
-                    </div>
-                    <div class="category-item">
-                        <div class="cat-icon">🧠</div>
-                        <div class="cat-name">Pengembangan Diri</div>
-                        <div class="cat-count">870 buku</div>
-                        <div class="cat-arrow">›</div>
-                    </div>
-                    <div class="category-item">
-                        <div class="cat-icon">💼</div>
-                        <div class="cat-name">Bisnis & Karir</div>
-                        <div class="cat-count">650 buku</div>
-                        <div class="cat-arrow">›</div>
-                    </div>
-                    <div class="category-item">
-                        <div class="cat-icon">🔬</div>
-                        <div class="cat-name">Sains & Teknologi</div>
-                        <div class="cat-count">490 buku</div>
-                        <div class="cat-arrow">›</div>
-                    </div>
+                    @foreach($categories->take(4) as $cat)
+                        <a href="{{ route('books.index', ['category' => [$cat->id]]) }}" class="category-item">
+                            <div class="cat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+                            </div>
+                            <div class="cat-name">{{ $cat->name }}</div>
+                            <div class="cat-count">{{ $cat->books_count }} buku</div>
+                            <div class="cat-arrow">›</div>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -1153,7 +1175,6 @@
     <script>
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', function(e) {
-                // Jangan hapus active jika itu tombol logout
                 if(!this.classList.contains('logout-item')) {
                     document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');

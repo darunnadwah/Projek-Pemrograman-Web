@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('stock')->default(0); // Stok untuk buku fisik
             $table->enum('type', ['physical', 'ebook', 'both']); // Membedakan jenis buku
             $table->string('file_path')->nullable(); // Lokasi file jika itu e-book
+            $table->string('image')->nullable(); // Foto/cover buku
         });
     }
 

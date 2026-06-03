@@ -19,18 +19,18 @@ class CategorySeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $categories = [
-            ['name' => 'Sejarah Nusantara'], // ID 1
-            ['name' => 'Fiksi Sains'],       // ID 2
-            ['name' => 'Puisi Indonesia'],   // ID 3
-            ['name' => 'Filsafat Timur'],    // ID 4
-            ['name' => 'Teknologi 2024'],    // ID 5
-            ['name' => 'Ekonomi Global'],    // ID 6
-            ['name' => 'Novel Klasik'],      // ID 7
-            ['name' => 'Sains & Alam'],      // ID 8
-            ['name' => 'Hukum & HAM'],       // ID 9
-            ['name' => 'Psikologi'],         // ID 10
-            ['name' => 'Biografi Tokoh'],    // ID 11
-            ['name' => 'Kuliner Nusantara'], // ID 12
+            ['name' => 'Fiksi & Novel'],        // ID 1
+            ['name' => 'Sains & Teknologi'],    // ID 2
+            ['name' => 'Sejarah'],              // ID 3
+            ['name' => 'Bisnis & Ekonomi'],    // ID 4
+            ['name' => 'Agama & Spiritual'],    // ID 5
+            ['name' => 'Buku Anak'],            // ID 6
+            ['name' => 'Jurnal & Riset'],       // ID 7
+            ['name' => 'Puisi Indonesia'],      // ID 8
+            ['name' => 'Filsafat Timur'],       // ID 9
+            ['name' => 'Hukum & HAM'],          // ID 10
+            ['name' => 'Psikologi'],            // ID 11
+            ['name' => 'Biografi Tokoh'],       // ID 12
         ];
 
         foreach ($categories as $category) {

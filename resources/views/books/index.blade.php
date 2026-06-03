@@ -36,6 +36,16 @@
         .orb1 { position: fixed; top: -150px; left: -120px; width: 500px; height: 500px; background: rgba(124,106,247,0.15); border-radius: 50%; filter: blur(80px); z-index: -1; pointer-events: none; }
         .orb2 { position: fixed; bottom: -100px; right: -100px; width: 300px; height: 300px; background: rgba(255,107,107,0.1); border-radius: 50%; filter: blur(80px); z-index: -1; pointer-events: none; }
 
+        /* Background Grid - Disabled */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: none;
+            background-size: 48px 48px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
         /* Navbar */
         nav {
             position: sticky;
@@ -461,7 +471,9 @@
     <!-- Navbar -->
     <nav>
         <a href="{{ route('welcome') }}" class="nav-brand">
-            <div class="nav-logo">📚</div>
+            <div class="nav-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+            </div>
             <div>
                 <div class="nav-brand-name">Bookify</div>
                 <div class="nav-brand-sub">DIGITAL LIBRARY</div>
@@ -469,11 +481,11 @@
         </a>
         <div class="nav-right">
             <a href="{{ route('dashboard') }}" class="back-btn">
-                <i class="ti ti-arrow-left"></i>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 Kembali
             </a>
             <a href="{{ route('cart.index') }}" class="cart-link">
-                <i class="ti ti-shopping-cart"></i>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                 Keranjang
                 <span class="cart-badge">{{ count((array) session('cart', [])) }}</span>
             </a>
@@ -483,14 +495,14 @@
     <!-- Alert -->
     @if(session('success'))
         <div class="alert alert-success">
-            <i class="ti ti-check"></i>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
             {{ session('success') }}
         </div>
     @endif
 
     @if(session('error'))
         <div class="alert alert-error">
-            <i class="ti ti-alert-circle"></i>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
             {{ session('error') }}
         </div>
     @endif
@@ -535,7 +547,11 @@
                 @foreach($books as $book)
                     <div class="book-card">
                         <div class="book-cover">
-                            📖
+                            @if($book->image)
+                                <img src="{{ $book->image }}" alt="{{ $book->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                {!! getBookCoverSVG($book->id, $book->category_id, $book->title) !!}
+                            @endif
                         </div>
                         <div class="book-content">
                             <h3 class="book-title">{{ $book->title }}</h3>
@@ -554,19 +570,25 @@
                             </div>
 
                             <div class="book-stock">
-                                📦 Stok: <strong>{{ $book->stock }}</strong> pcs
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 4px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Stok: <strong>{{ $book->stock }}</strong> pcs
                             </div>
 
                             <div class="book-price">
                                 Rp {{ number_format($book->price, 0, ',', '.') }}
                             </div>
 
-                            <div class="book-actions">
-                                <form action="{{ route('cart.add', $book->id) }}" method="POST" style="flex: 1;">
+                            <div class="book-actions" style="display: flex; gap: 8px;">
+                                <form action="{{ route('cart.add', $book->id) }}" method="POST" style="flex: 1; margin: 0;">
                                     @csrf
                                     <button type="submit" class="btn-add-cart">
-                                        <i class="ti ti-shopping-cart"></i>
-                                        Tambah
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                        Beli
+                                    </button>
+                                </form>
+                                <form action="{{ route('wishlist.add', $book->id) }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    <button type="submit" class="btn-add-cart" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #c4b5fd; padding: 8px 12px; width: auto; flex: none;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                                     </button>
                                 </form>
                             </div>
@@ -576,7 +598,9 @@
             </div>
         @else
             <div class="empty-state">
-                <div class="empty-icon">📚</div>
+                <div class="empty-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; color: #5a5680;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+                </div>
                 <h3 class="empty-title">Buku Tidak Ditemukan</h3>
                 <p class="empty-desc">Coba sesuaikan filter atau cari dengan kata kunci yang berbeda</p>
             </div>

@@ -361,7 +361,7 @@
     <!-- NAVBAR -->
     <nav>
         <a href="/" class="logo">
-            <div class="logo-icon">📚</div>
+            <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg></div>
 
             <div>
                 <div class="logo-title">Bookify</div>

@@ -179,7 +179,15 @@
             margin-bottom: 2rem;
             animation: fadeUp 0.8s ease both;
         }
-        .hero-badge::before { content: '✦'; color: var(--gold); }
+        .hero-badge::before { 
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23f59e0b" stroke-width="2"><polygon points="12 2 15.09 10.26 24 10.35 17.18 16.54 19.34 24.9 12 19.77 4.66 24.9 6.82 16.54 0 10.35 8.91 10.26 12 2"></polygon></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
         .hero-title {
             font-family: 'Playfair Display', serif;
@@ -534,7 +542,9 @@
 <!-- ═══════════════════════════════ NAVBAR ════════════════════════════════ -->
 <nav>
     <a href="{{ url('/') }}" class="nav-brand">
-        <div class="nav-brand-icon">📚</div>
+        <div class="nav-brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+        </div>
         <div>
             <div class="nav-brand-text">Bookify</div>
             <div class="nav-brand-sub">beli buku online</div>
@@ -548,8 +558,9 @@
         @auth
             {{-- Jika sudah login tampilkan dashboard & logout --}}
             <li>
-                <a href="{{ url('/dashboard') }}">
-                    👤 {{ Auth::user()->name }}
+                <a href="{{ url('/dashboard') }}" style="display: inline-flex; align-items: center; gap: 6px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    {{ Auth::user()->name }}
                 </a>
             </li>
             <li>
@@ -600,7 +611,9 @@
 <div class="search-wrap">
     <form method="GET" action="{{ route('books.index') }}">
         <div class="search-box">
-            <span style="font-size:18px; color:rgba(139,92,246,0.6);">🔍</span>
+            <span style="font-size:18px; color:rgba(139,92,246,0.6); display: inline-flex; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+            </span>
             
             <input 
                 type="text" 
@@ -624,8 +637,14 @@
 
 <!-- ═══════════════════════════════ CTA BUTTONS ══════════════════════════ -->
 <div class="cta-row">
-    <a href="{{ route('books.index') }}" class="cta-btn cta-primary">📖 Jelajahi Koleksi</a>
-    <a href="{{ url('/pinjam') }}"  class="cta-btn cta-ghost">🔖 Beli Buku</a>
+    <a href="{{ route('books.index') }}" class="cta-btn cta-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+        Jelajahi Koleksi
+    </a>
+    <a href="{{ route('books.index') }}" class="cta-btn cta-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        Beli Buku
+    </a>
     @guest
     @endguest
 </div>
@@ -655,43 +674,59 @@
     <h2 class="section-title">Jelajahi Kategori</h2>
     <p class="section-sub">Pilih kategori favorit Anda</p>
     <div class="cards-grid">
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">📖</span>
+        <a href="{{ route('books.index', ['category' => [1]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
+            </span>
             <div class="cat-name">Fiksi &amp; Novel</div>
             <div class="cat-count">1.240 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">🔬</span>
+        <a href="{{ route('books.index', ['category' => [2]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 9h4M10 3v6M14 3v6M14 9l5 9a2 2 0 0 1-1.8 3H5.8A2 2 0 0 1 4 18l5-9z"/></svg>
+            </span>
             <div class="cat-name">Sains &amp; Teknologi</div>
             <div class="cat-count">980 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">🏛️</span>
+        <a href="{{ route('books.index', ['category' => [3]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21h16M4 10h16M12 3L4 10h16L12 3zM6 10v11M10 10v11M14 10v11M18 10v11"/></svg>
+            </span>
             <div class="cat-name">Sejarah</div>
             <div class="cat-count">720 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">💼</span>
+        <a href="{{ route('books.index', ['category' => [4]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </span>
             <div class="cat-name">Bisnis &amp; Ekonomi</div>
             <div class="cat-count">654 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">🕌</span>
+        <a href="{{ route('books.index', ['category' => [5]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </span>
             <div class="cat-name">Agama &amp; Spiritual</div>
             <div class="cat-count">530 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">🧒</span>
+        <a href="{{ route('books.index', ['category' => [6]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            </span>
             <div class="cat-name">Buku Anak</div>
             <div class="cat-count">460 buku</div>
         </a>
-        <a href="{{ route('books.index') }}" class="cat-card">
-            <span class="cat-icon">📝</span>
+        <a href="{{ route('books.index', ['category' => [7]]) }}" class="cat-card">
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </span>
             <div class="cat-name">Jurnal &amp; Riset</div>
             <div class="cat-count">310 buku</div>
         </a>
         <a href="{{ route('books.index') }}" class="cat-card" style="border-style:dashed;">
-            <span class="cat-icon">🗂️</span>
+            <span class="cat-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </span>
             <div class="cat-name">Semua Kategori</div>
             <div class="cat-count">Lihat selengkapnya →</div>
         </a>
@@ -700,7 +735,7 @@
 
 <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
 <footer>
-    <p>© {{ date('Y') }} Bookify · Dibangun dengan ❤️ menggunakan
+    <p>© {{ date('Y') }} Bookify · Dibangun dengan <svg width="14" height="14" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" style="display:inline-block;vertical-align:middle;margin:0 2px;"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg> menggunakan
         <a href="https://laravel.com" target="_blank">Laravel</a>
     </p>
 </footer>
