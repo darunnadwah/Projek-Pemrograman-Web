@@ -13,31 +13,48 @@ class CartController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        return view('cart.index', compact('cart'));
+
+        $total = array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart));
+
+        return view('cart.checkout', compact('cart', 'total'));
     }
 
     public function add(Request $request, $id)
     {
         $book = Book::findOrFail($id);
-        
-        // Ambil data keranjang dari session, jika kosong buat array baru
-        $cart = session()->get('cart', []);
 
-        // Jika buku sudah ada di keranjang, tambah quantity-nya
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        $quantity = (int) $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+
+        if ($book->stock <= 0) {
+            return redirect()->back()->with('error', 'Stok buku tidak tersedia.');
+        }
+
+        $cart = session()->get('cart', []);
+        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+
+        if ($quantity > $book->stock || $currentQuantity + $quantity > $book->stock) {
+            return redirect()->back()->with('error', 'Stok tidak cukup. Sisa stok hanya '.$book->stock.' buah.');
+        }
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += $quantity;
         } else {
-            // Jika belum ada, masukkan data buku ke session
             $cart[$id] = [
                 "title" => $book->title,
-                "quantity" => 1,
+                "quantity" => $quantity,
                 "price" => $book->price,
                 "image" => $book->image // pastikan kolom image ada di tabel books
             ];
         }
+
         session()->put('cart', $cart);
-        
-        return redirect()->back()->with('success', 'Buku berhasil ditambahkan ke keranjang!');
+
+        return redirect()->back()->with('success', 'Buku berhasil ditambahkan ke keranjang. Jumlah: '.$cart[$id]['quantity']);
     }
 
     public function remove($id)
@@ -56,6 +73,31 @@ class CartController extends Controller
     {
         session()->forget('cart');
         return redirect()->back()->with('success', 'Keranjang telah dikosongkan!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (!isset($cart[$id])) {
+            return redirect()->back()->with('error', 'Item tidak ditemukan di keranjang.');
+        }
+
+        $action = $request->input('action');
+
+        if ($action === 'increment') {
+            $cart[$id]['quantity']++;
+        } elseif ($action === 'decrement') {
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity']--;
+            } else {
+                unset($cart[$id]);
+            }
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Jumlah item keranjang berhasil diperbarui.');
     }
 
     public function checkoutPage()

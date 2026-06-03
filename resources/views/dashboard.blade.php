@@ -257,6 +257,18 @@
             color: var(--accent);
             border: 1px solid rgba(124,58,237,0.25);
         }
+        .sidebar-item-toggle {
+            justify-content: center;
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+        .sidebar-item-toggle:hover {
+            background: var(--bg-card-hover);
+        }
+        .sidebar-item-hidden {
+            display: none;
+        }
         .sidebar-item svg { width: 16px; height: 16px; flex-shrink: 0; }
         .sidebar-badge {
             margin-left: auto;
@@ -727,6 +739,15 @@
             color: inherit;
         }
         .category-item:hover { background: var(--bg-card-hover); border-color: rgba(124,58,237,0.2); }
+        .category-item-toggle {
+            justify-content: center;
+            background: transparent;
+            border: 1px solid transparent;
+            width: 100%;
+            color: var(--text-secondary);
+        }
+        .category-item-toggle:hover { background: var(--bg-card-hover); }
+        .category-hidden { display: none; }
         .cat-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
         .cat-icon svg { width: 18px; height: 18px; color: var(--purple-light); }
         .cat-name { font-size: 0.83rem; font-weight: 500; color: var(--text-primary); flex: 1; }
@@ -890,18 +911,24 @@
         </a>
 
         <div class="sidebar-section-label">Jelajahi</div>
-        <a href="{{ route('books.index', ['category' => [1]]) }}" class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.905 0-5.64-.78-8.006-2.147m16.012 0a11.953 11.953 0 0 0-8.006 2.147"/></svg>
-            Fiksi & Novel
+        <a href="{{ route('books.index') }}" class="sidebar-item">
+            Semua Kategori
         </a>
-        <a href="{{ route('books.index', ['category' => [2]]) }}" class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-            Sains & Teknologi
-        </a>
-        <a href="{{ route('books.index', ['category' => [4]]) }}" class="sidebar-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Bisnis & Ekonomi
-        </a>
+        @foreach($categories->take(3) as $category)
+            <a href="{{ route('books.index', ['category' => [$category->id]]) }}" class="sidebar-item">
+                {{ $category->name }}
+            </a>
+        @endforeach
+        @if($categories->count() > 3)
+            @foreach($categories->skip(3) as $category)
+                <a href="{{ route('books.index', ['category' => [$category->id]]) }}" class="sidebar-item sidebar-item-hidden more-category">
+                    {{ $category->name }}
+                </a>
+            @endforeach
+            <button type="button" class="sidebar-item sidebar-item-toggle" id="show-more-categories">
+                Lainnya
+            </button>
+        @endif
 
         <div class="sidebar-section-label">Akun</div>
         <a href="{{ route('profile.edit') }}" class="sidebar-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
@@ -1157,14 +1184,19 @@
                 <div class="category-list">
                     @foreach($categories->take(4) as $cat)
                         <a href="{{ route('books.index', ['category' => [$cat->id]]) }}" class="category-item">
-                            <div class="cat-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
-                            </div>
                             <div class="cat-name">{{ $cat->name }}</div>
-                            <div class="cat-count">{{ $cat->books_count }} buku</div>
-                            <div class="cat-arrow">›</div>
                         </a>
                     @endforeach
+                    @if($categories->count() > 4)
+                        @foreach($categories->skip(4) as $cat)
+                            <a href="{{ route('books.index', ['category' => [$cat->id]]) }}" class="category-item category-hidden more-main-category">
+                                <div class="cat-name">{{ $cat->name }}</div>
+                            </a>
+                        @endforeach
+                        <button type="button" class="category-item category-item-toggle" id="show-more-main-categories">
+                            Lainnya
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -1175,12 +1207,38 @@
     <script>
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', function(e) {
-                if(!this.classList.contains('logout-item')) {
+                if(!this.classList.contains('logout-item') && !this.classList.contains('sidebar-item-toggle')) {
                     document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
                 }
             });
         });
+
+        const toggleButton = document.getElementById('show-more-categories');
+        if (toggleButton) {
+            toggleButton.addEventListener('click', function() {
+                const hiddenCategories = document.querySelectorAll('.more-category');
+                const isHidden = hiddenCategories[0].classList.contains('sidebar-item-hidden');
+
+                hiddenCategories.forEach(item => {
+                    item.classList.toggle('sidebar-item-hidden', !isHidden);
+                });
+                this.textContent = isHidden ? 'Tutup' : 'Lainnya';
+            });
+        }
+
+        const mainToggleButton = document.getElementById('show-more-main-categories');
+        if (mainToggleButton) {
+            mainToggleButton.addEventListener('click', function() {
+                const hiddenCategories = document.querySelectorAll('.more-main-category');
+                const isHidden = hiddenCategories[0].classList.contains('category-hidden');
+
+                hiddenCategories.forEach(item => {
+                    item.classList.toggle('category-hidden', !isHidden);
+                });
+                this.textContent = isHidden ? 'Tutup' : 'Lainnya';
+            });
+        }
     </script>
 
 </body>

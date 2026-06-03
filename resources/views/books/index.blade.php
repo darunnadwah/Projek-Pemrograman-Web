@@ -408,6 +408,92 @@
             gap: 6px;
         }
 
+        .quantity-input {
+            width: 68px;
+            min-width: 68px;
+            padding: 8px 10px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: #f8f8ff;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .quantity-input::-webkit-inner-spin-button,
+        .quantity-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: rgba(124,106,247,0.5);
+            box-shadow: 0 0 0 2px rgba(124,106,247,0.12);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 7, 17, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(420px, 100%);
+            background: rgba(13, 16, 35, 0.98);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: 0 28px 80px rgba(0,0,0,0.35);
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            margin-bottom: 12px;
+            color: #f8f8ff;
+            font-size: 1.2rem;
+        }
+
+        .modal-body p {
+            color: rgba(240,240,255,0.8);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-size: 0.96rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+        }
+
+        .modal-button {
+            padding: 12px 22px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .modal-button-primary {
+            background: linear-gradient(135deg, #7c6af7, #4f46e5);
+            color: #ffffff;
+        }
+
+        .modal-button-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(124,106,247,0.24);
+        }
+
         .btn-add-cart:hover {
             box-shadow: 0 6px 20px rgba(124,106,247,0.4);
             transform: translateY(-2px);
@@ -507,6 +593,21 @@
         </div>
     @endif
 
+    <!-- Stock Warning Modal -->
+    <div class="modal-overlay" id="stockModal" aria-hidden="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Stok Tidak Cukup</h2>
+            </div>
+            <div class="modal-body">
+                <p id="stockModalMessage">Jumlah yang Anda masukkan melebihi stok tersedia.</p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="modal-button modal-button-primary" id="stockModalClose">Tutup</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Container -->
     <div class="container">
         <!-- Header -->
@@ -578,12 +679,13 @@
                             </div>
 
                             <div class="book-actions" style="display: flex; gap: 8px;">
-                                <form action="{{ route('cart.add', $book->id) }}" method="POST" style="flex: 1; margin: 0;">
+                                <form action="{{ route('cart.add', $book->id) }}" method="POST" novalidate class="cart-add-form" style="flex: 1; margin: 0; display: flex; gap: 8px; align-items: center;" data-stock="{{ $book->stock }}" data-cart-qty="{{ session('cart')[$book->id]['quantity'] ?? 0 }}">
                                     @csrf
                                     <button type="submit" class="btn-add-cart">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                                         Beli
                                     </button>
+                                    <input type="number" name="quantity" value="1" min="1" max="{{ $book->stock }}" class="quantity-input" aria-label="Jumlah buku" />
                                 </form>
                                 <form action="{{ route('wishlist.add', $book->id) }}" method="POST" style="margin: 0;">
                                     @csrf
@@ -616,6 +718,37 @@
                     alert.style.opacity = '0';
                     setTimeout(() => alert.remove(), 300);
                 }, 3000);
+            });
+
+            const stockModal = document.getElementById('stockModal');
+            const stockModalMessage = document.getElementById('stockModalMessage');
+            const stockModalClose = document.getElementById('stockModalClose');
+
+            document.querySelectorAll('.cart-add-form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    const quantityInput = form.querySelector('.quantity-input');
+                    const requestedQty = Number(quantityInput.value) || 1;
+                    const stock = Number(form.dataset.stock) || Number(quantityInput.max);
+                    const currentCartQty = Number(form.dataset.cartQty) || 0;
+                    const availableStock = Math.max(stock - currentCartQty, 0);
+
+                    if (requestedQty > availableStock) {
+                        event.preventDefault();
+                        stockModalMessage.textContent = `Stok tidak cukup. Sisa stok hanya ${availableStock} buah.`;
+                        stockModal.classList.add('active');
+                        quantityInput.focus();
+                    }
+                });
+            });
+
+            stockModalClose.addEventListener('click', () => {
+                stockModal.classList.remove('active');
+            });
+
+            stockModal.addEventListener('click', (event) => {
+                if (event.target === stockModal) {
+                    stockModal.classList.remove('active');
+                }
             });
         });
     </script>
