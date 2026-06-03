@@ -450,13 +450,13 @@
         </a>
     </nav>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1 class="header-title">🛒 Keranjang Belanja</h1>
-            <p class="header-sub">Periksa pesanan Anda sebelum checkout</p>
-        </div>
+<!-- Main Container -->
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1 class="header-title">🛒 Keranjang Belanja</h1>
+        <p class="header-sub">Periksa pesanan Anda sebelum checkout</p>
+    </div>
 
         @if(session('cart') && count(session('cart')) > 0)
             <!-- Cart Content -->

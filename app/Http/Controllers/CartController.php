@@ -58,17 +58,31 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Keranjang telah dikosongkan!');
     }
 
-    public function checkout()
+    public function checkoutPage()
     {
-        // 1. Cek apakah user sudah login (Cegah error user_id null)
         if (!auth()->check()) {
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk checkout.');
         }
 
+        $cart = session()->get('cart', []);
+
+        if (!$cart) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang masih kosong!');
+        }
+
+        $total = array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart));
+
+        return view('cart.checkout', compact('cart', 'total'));
+    }
+
+    public function checkout()
+    {
         $cart = session()->get('cart');
 
         if (!$cart) {
-            return redirect()->back()->with('error', 'Keranjang masih kosong!');
+            return redirect()->route('cart.index')->with('error', 'Keranjang masih kosong!');
         }
 
         // 2. Simpan ke tabel orders
