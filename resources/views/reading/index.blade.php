@@ -314,6 +314,8 @@
                 <h2 class="empty-title">Tidak Ada Buku Aktif</h2>
                 <p class="empty-desc">Beli e-book atau tambahkan buku ke daftar baca untuk melacak progres Anda.</p>
                 <a href="{{ route('books.index') }}" class="btn-shop">Jelajahi Katalog Buku</a>
+            </div>
+        @endif
     </div>
 
 

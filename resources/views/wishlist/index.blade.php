@@ -290,6 +290,8 @@
                 <h2 class="empty-title">Wishlist Kosong</h2>
                 <p class="empty-desc">Simpan buku favorit Anda di sini agar tidak lupa.</p>
                 <a href="{{ route('books.index') }}" class="btn-shop">Jelajahi Katalog Buku</a>
+            </div>
+        @endif
     </div>
 
 
