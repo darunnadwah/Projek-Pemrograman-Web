@@ -13,6 +13,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        if (Auth::user()?->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         $userId = Auth::id();
 
         // 1. Seed dummy session data for reading list & wishlist if empty, to look realistic

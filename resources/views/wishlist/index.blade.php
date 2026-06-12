@@ -4,7 +4,7 @@
     if ($referer && !str_contains($referer, $currentPath)) {
         session(['back_url_' . $currentPath => $referer]);
     }
-    $backUrl = session('back_url_' . $currentPath, route('dashboard'));
+    $backUrl = session('back_url_' . $currentPath, auth()->user()?->role === 'admin' ? route('admin.dashboard') : route('dashboard'));
     $backLabel = 'Kembali ke Dashboard';
     if (str_contains($backUrl, '/settings')) {
         $backLabel = 'Kembali ke Pengaturan';
@@ -221,7 +221,7 @@
     <div class="orb2"></div>
 
     <nav>
-        <a href="{{ route('dashboard') }}" class="nav-brand">
+        <a href="{{ auth()->user()?->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="nav-brand">
             <div class="nav-logo">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"/><path d="M18 8V7a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4"/></svg>
             </div>
