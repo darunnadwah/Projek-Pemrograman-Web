@@ -394,7 +394,7 @@
             <a href="{{ route('books.index') }}" class="nav-link">Jelajahi Buku</a>
             <a href="{{ route('about') }}" class="nav-link active">Tentang Kami</a>
             @if(auth()->check())
-                <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="nav-link">Dashboard</a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="nav-link" style="background: none; border: none; cursor: pointer; padding: 0;">Keluar</button>

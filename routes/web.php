@@ -9,10 +9,21 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReadingController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminBookController;
+use App\Http\Controllers\AdminUserController;
 
-Route::get('/admin/dashboard', function () {
-    return view('admin-dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/books', [AdminBookController::class, 'index'])->name('admin.books.index');
+    Route::get('/books/create', [AdminBookController::class, 'create'])->name('admin.books.create');
+    Route::post('/books', [AdminBookController::class, 'store'])->name('admin.books.store');
+    Route::patch('/books/{book}/stock', [AdminBookController::class, 'updateStock'])->name('admin.books.updateStock');
+    Route::delete('/books/{book}', [AdminBookController::class, 'destroy'])->name('admin.books.destroy');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::patch('/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('admin.users.updateRole');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+});
 
 // Route untuk halaman katalog buku
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
